@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="calculator" data-controller="calculator">
+    <div class="screen">
+      <input type="number" data-calculator-target="expression" data-action="keyup->calculator#updateValues" class="calc-input">
+      <div id="first-value" class="screen-value" data-calculator-target="firstValue"></div>
+      <div id="operator" class="screen-value" data-calculator-target="operator"></div>
+      <div id="second-value" class="screen-value" data-calculator-target="secondValue"></div>
+      <div id="result" class="screen-value" data-calculator-target="result"></div>
+
+    </div>
+    <div class="buttons">
+      <div class="number-container">
+        <% @calc_nums.each do |n_row| %>
+          <div class="num-row">
+            <% n_row.each do |n| %>
+              <button class="calc-btn" data-action="click->calculator#placeNumber">
+                <%= n %>
+              </button>
+            <% end %>
+
+            <% if n_row.include?(0) %>
+              <button class="calc-btn" data-action="click->calculator#placeDot">
+                .
+              </button>
+              <button class="calc-btn" data-action="click->calculator#getResult">
+                =
+              </button>
+            <% end %>
+
+
+          </div>
+        <% end %>
+      </div>
+      <div class="symbol-container">
+        <% @calc_syms.each do |c_sym| %>
+          <button class="calc-btn" data-action="click->calculator#placeOperator">
+            <%= c_sym %>
+          </button>
+        <% end %>
+          <button class="calc-btn" data-action="click->calculator#clearCalc">
+            CE
+          </button>
+      </div>
+    </div>
+  </div>
+</div>
